@@ -1,0 +1,33 @@
+name: Test and Lint React App
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  lint_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 1: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # Step 2: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 3: Linting using ESLint
+      - name: Run ESLint
+        run: npm run lint
+
+      # Step 4: Code formatting using Prettier
+      - name: Run Prettier
+        run: npm run format:check
+
+
